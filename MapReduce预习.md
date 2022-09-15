@@ -49,6 +49,6 @@ Shufe过程是指从Mapper产生的直接输出结果，经过一系列的处理
 整个Shufle过程可以分为两个阶段，Mapper 端的Shufle和Reducer端的Shufile。由Mapper产生的数据并不会直接写入磁盘，而是先存储在内存中，当内存中的数据达到设定阈值时，再把数据写到本地磁盘，并同时进行sort (排序)、combine ( 合并)、partition (分片)等操作。sort 操作是把Mapper产生的结果按key值进行排序; combine 操作是把key值相同的相邻记录进行合并; partition 操作涉及如何把数据均衡地分配给多个Reducer,它直接关系到Reducer的负载均衡。其中combine操作不一-定会有，因为在某些场景不适用，但为了使Mapper的输出结果更加紧凑，大部分情况下都会使用。      
 Maper和Reducer是运行在不同的结点上的，或者说，Mapper 和Reducer运行在同一个第点上的情况很少，并且，Reducer 数量总是比Mapper数量少，所以Reducer端总是要从其他街↑结点上下载Mapper的结果数据，这些数据也要进行相应的处理才能更好地被Rchuce理这些处理过程就是Reduer端的Sule过程。      
 ### Reduce过程   
-Reducer接收<key, {value list}>形式的数据流，形成<key, value>形式的数据输出，输出数据直接写入HDFS,具体的处理过程可由用户定义。在WordCount 中，Reducer 会将相同key的value list进行累加，得到这个单词出现的总次数，然后输出。     
+Reducer接收<key, {value list}>形式的数据流，形成<key, value>形式的数据输出，输出数据直接写入HDFS,具体的处理过程可由用户定义。在WordCount 中，Reducer 会将相同key的value list进行累加，得到这个单词出现的总次数，然后输出。      
 ## MapReduce任务运行流程   
 ![](https://img-blog.csdnimg.cn/c322ff0b54fa434b93625d8f6fa2eb2e.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBAU2hvY2thbmc=,size_103,color_FFFFFF,t_70,g_se,x_16)
